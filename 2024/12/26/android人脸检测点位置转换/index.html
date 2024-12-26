@@ -23,21 +23,21 @@
   
   
   
-    <meta name="description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 123">
+    <meta name="description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android人脸检测点位置转换">
 <meta property="og:url" content="https://www.zhaozhuohua.com/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="桃之夭夭">
-<meta property="og:description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 123">
+<meta property="og:description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.zhaozhuohua.com/.com//6471979-92cc8d7b2903b744.webp">
-<meta property="og:image" content="https://www.zhaozhuohua.com/.com//6471979-8347d50ece1ed520.webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6471979-8347d50ece1ed520.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2024-12-26T09:20:00.000Z">
-<meta property="article:modified_time" content="2024-12-26T09:33:18.816Z">
+<meta property="article:modified_time" content="2024-12-26T09:41:02.412Z">
 <meta property="article:author" content="清柠茶">
 <meta property="article:tag" content="android, 相机">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.zhaozhuohua.com/.com//6471979-92cc8d7b2903b744.webp">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip">
   
   
     <link rel="alternate" href="/atom.xml" title="桃之夭夭" type="application/atom+xml">
@@ -162,10 +162,12 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <blockquote>
+        <meta name="referrer" content="no-referrer">
+
+<blockquote>
 <p>android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。</p>
 </blockquote>
-<p>先上效果图：<br><img src="/.com//6471979-92cc8d7b2903b744.webp" alt="人脸检测.gif"></p>
+<p>先上效果图：<br><img src="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip" alt="人脸检测.gif"></p>
 <p>Android 实现人脸检主要调用一下接口和方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mCamera!!.setFaceDetectionListener(object : Camera.FaceDetectionListener &#123;<br>        override fun onFaceDetection(p0: Array&lt;out Camera.Face&gt;?, p1: Camera?) &#123;<br>            var size = 0<br>            if (p0 != null) &#123;<br>                size = p0.size<br>            &#125;<br>            Log.i(&quot;face&quot;, &quot;size: $size&quot;)<br>        &#125;<br>    &#125;)<br>//开始人脸检测<br>mCamera!!.startFaceDetection()<br></code></pre></td></tr></table></figure>
 
@@ -177,7 +179,7 @@
 <p>The direction is relative to the sensor orientation, that is, what the sensor sees. The direction is not affected by the rotation or mirroring of <a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/hardware/Camera.html#setDisplayOrientation(int)">Camera.setDisplayOrientation(int)</a>. The face bounding rectangle does not provide any information about face orientation.</p>
 </blockquote>
 <p>原文地址 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/hardware/Camera.Face.html">Camera.Face</a></p>
-<p>英文不好理解的话咱们直接上图<br><img src="/.com//6471979-8347d50ece1ed520.webp" alt="Camera.Face 中坐标.png"></p>
+<p>英文不好理解的话咱们直接上图<br><img src="https://upload-images.jianshu.io/upload_images/6471979-8347d50ece1ed520.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Camera.Face 中坐标.png"></p>
 <p>如图，正常view (0,0) 坐标是在左上角，而相机返回的人脸坐标(0,0)实在界面中央，所以拿到的Face信息咱们要进行转换后才能使用！<br>转换方法如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"> /**<br> * 准备用于转换的矩阵工具<br> *<br> * @param isBackCamera  是否后置相机<br> * @param displayOrientation  摄像头设置的角度<br> * @param viewWidth  预览界面宽<br> * @param viewHeight  预览界面高<br> */<br>fun prepareMatrix(isBackCamera: Boolean, displayOrientation: Int,<br>                  viewWidth: Int, viewHeight: Int): Matrix &#123;<br>    val matrix = Matrix()<br>    //前置摄像头处理镜像关系<br>    matrix.setScale(1f, (if (!isBackCamera) -1 else 1).toFloat())<br>    matrix.postRotate(displayOrientation.toFloat())<br>    matrix.postScale(viewWidth / 2000f, viewHeight / 2000f)<br>    matrix.postTranslate(viewWidth / 2f, viewHeight / 2f)<br><br>    return matrix<br>&#125;<br></code></pre></td></tr></table></figure>
 
