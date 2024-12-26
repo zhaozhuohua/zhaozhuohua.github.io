@@ -23,21 +23,21 @@
   
   
   
-    <meta name="description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 1">
+    <meta name="description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图：   Android 实现人脸检主要调用一下接口和方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android人脸检测点位置转换">
 <meta property="og:url" content="https://www.zhaozhuohua.com/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="桃之夭夭">
-<meta property="og:description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图： Android 实现人脸检主要调用一下接口和方法 1">
+<meta property="og:description" content="android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。  先上效果图：   Android 实现人脸检主要调用一下接口和方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://www.zhaozhuohua.com/.com//12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/6471979-92cc8d7b2903b744.webp">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6471979-8347d50ece1ed520.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2024-12-26T09:20:00.000Z">
-<meta property="article:modified_time" content="2024-12-26T09:41:02.412Z">
+<meta property="article:modified_time" content="2024-12-26T09:45:23.449Z">
 <meta property="article:author" content="清柠茶">
 <meta property="article:tag" content="android, 相机">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip">
+<meta name="twitter:image" content="https://www.zhaozhuohua.com/.com//12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/6471979-92cc8d7b2903b744.webp">
   
   
     <link rel="alternate" href="/atom.xml" title="桃之夭夭" type="application/atom+xml">
@@ -167,7 +167,9 @@
 <blockquote>
 <p>android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。</p>
 </blockquote>
-<p>先上效果图：<br><img src="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip" alt="人脸检测.gif"></p>
+<p>先上效果图：</p>
+<img src="/.com//12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/6471979-92cc8d7b2903b744.webp" class title="This is an test image">
+
 <p>Android 实现人脸检主要调用一下接口和方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mCamera!!.setFaceDetectionListener(object : Camera.FaceDetectionListener &#123;<br>        override fun onFaceDetection(p0: Array&lt;out Camera.Face&gt;?, p1: Camera?) &#123;<br>            var size = 0<br>            if (p0 != null) &#123;<br>                size = p0.size<br>            &#125;<br>            Log.i(&quot;face&quot;, &quot;size: $size&quot;)<br>        &#125;<br>    &#125;)<br>//开始人脸检测<br>mCamera!!.startFaceDetection()<br></code></pre></td></tr></table></figure>
 
