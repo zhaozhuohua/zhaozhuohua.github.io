@@ -50,12 +50,12 @@
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   
-  
     
       
-<link rel="stylesheet" href="https://npm.webcache.cn/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.css">
 
     
+  
   
   
     
@@ -176,8 +176,18 @@
       
       
       
+        <a data-aos="zoom-in" href="/about/index.html#comments" class="article-comment-link">
+          <span class="post-comments-count waline-comment-count" data-path="/about/index.html" itemprop="commentCount"></span>
+          留言
+        </a>
       
       
+      
+      
+        <span data-aos="zoom-in" class="article-visitor-link">
+          <span class="waline-pageview-count" data-path="/about/">0</span>
+          <em class="post-meta-item-text">阅读量</em>
+        </span>
       
       
 
@@ -188,9 +198,9 @@
 </article>
 
 
+  <div id="comments" class="wcomment" data-aos="fade-up"></div>
 
 
-  <div id="comments" class="gtcomment" data-aos="fade-up"></div>
 
 
 
@@ -485,27 +495,27 @@
       
 
 
-
-
-  
-<script src="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js" integrity="sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU&#x2F;lcEH5O8eVbSDhbPwsiVUTp&#x2F;aGX&#x2F;z&#x2F;5EuMA" crossorigin="anonymous" data-pjax></script>
-
-  
-  <script data-pjax>
-    var gitalkId = location.pathname;
-    var gitalk = new Gitalk({
-      clientID: 'Ov23lijnPIfl8yEpBgpo',
-      clientSecret: 'd0c65d3cb7acd01853dea85ed6f9ce9c1f2a3110',
-      repo: 'zhaozhuohua.github.io',
-      owner: 'imqingyue@163.com',
-      admin: "imqingyue@163.com",
-      id: gitalkId, // Ensure uniqueness and length less than 50
-      distractionFreeMode: false // Facebook-like distraction free mode
-    })
-    if (document.getElementById('comments')) {
-      gitalk.render('comments')
+  <script data-pjax type="module">
+    const { init } = await safeImport("https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs", "sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5")
+    if(_$('.wcomment')) {
+      window.walineInstance = init({
+        el: '.wcomment',
+        serverURL: 'https://nkehlzbl.api.lncldglobal.com',
+        lang: 'zh-CN',
+        locale: {},
+        emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+        meta: ["nick","mail","link"],
+        requiredMeta: ["nick","mail"],
+        wordLimit: JSON.parse('0'),
+        comment: true,
+        pageSize: JSON.parse('10'),
+        dark: 'html[data-theme="dark"]',
+        pageview: JSON.parse('true'),
+    });
     }
   </script>
+
+
 
 
 
