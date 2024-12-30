@@ -50,12 +50,6 @@
   <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   
-    
-      
-<link rel="stylesheet" href="https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.css">
-
-    
-  
   
   
     
@@ -174,19 +168,14 @@
       
       
       
-      
         <a data-aos="zoom-in" href="/README.html#comments" class="article-comment-link">
-          <span class="post-comments-count waline-comment-count" data-path="/README.html" itemprop="commentCount"></span>
+          <span class="post-comments-count valine-comment-count" data-xid="/README.html" itemprop="commentCount"></span>
           留言
         </a>
       
       
       
       
-        <span data-aos="zoom-in" class="article-visitor-link">
-          <span class="waline-pageview-count" data-path="/README.html">0</span>
-          <em class="post-meta-item-text">阅读量</em>
-        </span>
       
       
 
@@ -196,8 +185,8 @@
 
 </article>
 
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
 
-  <div id="comments" class="wcomment" data-aos="fade-up"></div>
 
 
 
@@ -492,27 +481,35 @@
         }
       </script>
       
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
 
-
-  <script data-pjax type="module">
-    const { init } = await safeImport("https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs", "sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5")
-    if(_$('.wcomment')) {
-      window.walineInstance = init({
-        el: '.wcomment',
-        serverURL: 'blogserververcel.vercel.app',
-        lang: 'zh-CN',
-        locale: {},
-        emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
-        meta: ["nick","mail","link"],
-        requiredMeta: ["nick","mail"],
-        wordLimit: JSON.parse('0'),
-        comment: true,
-        pageSize: JSON.parse('10'),
-        dark: 'html[data-theme="dark"]',
-        pageview: JSON.parse('true'),
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
     });
-    }
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "nkEhLzBl0SrjapU4U0R1WfMC-MdYXbMMI",
+      appKey: "7tcMEL3Kz3MZYe1BaIf5X7Kn",
+      placeholder: "Just go go",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
   </script>
+
+
 
 
 
