@@ -1,0 +1,632 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    Android人脸检测功能和检测特效 |
+    
+    桃之夭夭
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+  
+    <meta name="description" content="这段时间再做安防相关的硬件设备定制，涉及到了小区的业主和流动人员人员登记、闸机管理和小区内部摄像头等等。这里面用到了人脸检测、识别，人脸检测用了虹软的算法，虹软的文档还是比较全的这里不多做介绍。这里主要说下android自带的人脸检测和人脸框的绘制。  先来看看人脸识别框特效： 这个例子使用Camera API实现的并不是Camera2 API，原因是发现2019年了还有的设备居然不支持Ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android人脸检测功能和检测特效">
+<meta property="og:url" content="https://www.zhaozhuohua.com/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/index.html">
+<meta property="og:site_name" content="桃之夭夭">
+<meta property="og:description" content="这段时间再做安防相关的硬件设备定制，涉及到了小区的业主和流动人员人员登记、闸机管理和小区内部摄像头等等。这里面用到了人脸检测、识别，人脸检测用了虹软的算法，虹软的文档还是比较全的这里不多做介绍。这里主要说下android自带的人脸检测和人脸框的绘制。  先来看看人脸识别框特效： 这个例子使用Camera API实现的并不是Camera2 API，原因是发现2019年了还有的设备居然不支持Ca">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6471979-4fbc626d4d2447be.gif?imageMogr2/auto-orient/strip">
+<meta property="article:published_time" content="2024-12-31T07:45:29.000Z">
+<meta property="article:modified_time" content="2024-12-31T07:47:29.090Z">
+<meta property="article:author" content="清柠茶">
+<meta property="article:tag" content="相机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6471979-4fbc626d4d2447be.gif?imageMogr2/auto-orient/strip">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="桃之夭夭" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="https://gitee.com/staraaron/blog_source/raw/master/image/wallpaper/219884.jpg" alt="Android人脸检测功能和检测特效">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Android人脸检测功能和检测特效</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content">
+          
+          <section id="main"><article id="post-Android人脸检测功能和检测特效" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-12-31T07:45:29.000Z" itemprop="datePublished">2024-12-31</time>
+    <time style="display: none;" id="post-update-time">2024-12-31</time>
+  </a>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <meta name="referrer" content="no-referrer">
+
+<blockquote>
+<p>这段时间再做安防相关的硬件设备定制，涉及到了小区的业主和流动人员人员登记、闸机管理和小区内部摄像头等等。<br>这里面用到了人脸检测、识别，人脸检测用了虹软的算法，虹软的文档还是比较全的这里不多做介绍。这里主要说下android自带的人脸检测和人脸框的绘制。</p>
+</blockquote>
+<p>先来看看人脸识别框特效：<br><img src="https://upload-images.jianshu.io/upload_images/6471979-4fbc626d4d2447be.gif?imageMogr2/auto-orient/strip" alt="人脸检测特效.gif"></p>
+<p><em>这个例子使用Camera API实现的并不是Camera2 API，原因是发现2019年了还有的设备居然不支持Camera2的人脸识别，为了通用就用了Camera API。</em><br>以下为主要代码<br>上代码：<br>1、下来是处理人脸检测回调方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">//进行相机初始化<br>cameraHelper = CameraControllerHelper.Builder()<br>        .previewViewSize(Point(camera_surfaceview.measuredWidth, camera_surfaceview.measuredHeight))<br>        .rotation(mBaseAc.windowManager.defaultDisplay.rotation)<br>        .specificCameraId(cameraId)<br>        .isMirror(isMirror())<br>        .previewOn(camera_surfaceview)<br>        .cameraListener(this@CameraFaceFm)<br>        //设置人脸检测回调方法<br>        .setFaceDetectionListener(object : Camera.FaceDetectionListener &#123;<br>            override fun onFaceDetection(p0: Array&lt;out Camera.Face&gt;?, p1: Camera?) &#123;<br>                if (faceRectView != null) &#123;<br>                    faceRectView.clearFaceInfo()<br>                    faceRectView.addFaceInfo(p0!!.toList())<br>                &#125;<br>            &#125;<br>        &#125;)<br>        .build()<br>val p = getScreenPoint()<br>DrawFaceHelper.cameraWidth = p.x.toFloat()<br>DrawFaceHelper.cameraHeight = p.y.toFloat()<br>DrawFaceHelper.isBackCameraId = isBackCameraId()<br>cameraHelper.init()<br>cameraHelper.start()<br></code></pre></td></tr></table></figure>
+<p>2、相机的启动、参数设置和人脸检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">if (mCamera != null) &#123;<br>                return<br>            &#125;<br>            //若指定了相机ID且该相机存在，则打开指定的相机<br>            if (specificCameraId != null) &#123;<br>                mCameraId = specificCameraId!!<br>            &#125; else &#123;<br>                //相机数量为2则打开1,1则打开0,相机ID 1为前置，0为后置<br>                mCameraId = Camera.getNumberOfCameras() - 1<br>            &#125;<br><br>            //没有相机<br>            if (mCameraId == -1) &#123;<br>                cameraListener?.onCameraError(Exception(&quot;camera not found&quot;))<br>                return<br>            &#125;<br>            if (mCamera == null) &#123;<br>                mCamera = Camera.open(mCameraId)<br>            &#125;<br>            displayOrientation = getCameraOri(rotation)<br>            mCamera!!.setDisplayOrientation(displayOrientation)<br>            try &#123;<br>                val parameters = mCamera!!.parameters<br>                parameters.previewFormat = ImageFormat.NV21<br><br>                //预览大小设置<br>                previewSize = parameters.previewSize<br>                val supportedPreviewSizes = parameters.supportedPreviewSizes<br>                if (supportedPreviewSizes != null &amp;&amp; supportedPreviewSizes.size &gt; 0) &#123;<br>                    previewSize = currentPreviewSize<br>                &#125;<br><br>                parameters.setPreviewSize(previewSize!!.width, previewSize!!.height)<br><br>                pictureSize = parameters.pictureSize<br>                val supportedPicviewSizes = parameters.supportedPreviewSizes<br>                if (supportedPicviewSizes != null &amp;&amp; supportedPicviewSizes.size &gt; 0) &#123;<br>                    pictureSize = currentPictureSize<br>                &#125;<br>                parameters.setPictureSize(pictureSize!!.width, pictureSize!!.height)<br><br><br>                //对焦模式设置<br>                val supportedFocusModes = parameters.supportedFocusModes<br>                if (supportedFocusModes != null &amp;&amp; supportedFocusModes.size &gt; 0) &#123;<br>                    if (supportedFocusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) &#123;<br>                        parameters.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE<br>                    &#125; else if (supportedFocusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) &#123;<br>                        parameters.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO<br>                    &#125; else if (supportedFocusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) &#123;<br>                        parameters.focusMode = Camera.Parameters.FOCUS_MODE_AUTO<br>                    &#125;<br>                &#125;<br>                setCameraParameters(parameters)<br>                mCamera!!.setPreviewTexture(previewDisplayView!!.getSurfaceTexture())<br>                mCamera!!.setPreviewCallback(this)<br>                mCamera!!.startPreview()<br><br>                //注意这段，这里是设置人脸检测监听和启动<br>                if (mFaceDetectionListener != null) &#123;<br>                    mCamera!!.setFaceDetectionListener(mFaceDetectionListener)<br>                    mCamera!!.startFaceDetection()<br>                &#125;<br>                if (autoFocusCallback != null) &#123;<br>                    mCamera!!.autoFocus(autoFocusCallback)<br>                &#125;<br>                cameraListener?.onCameraOpened(mCamera!!, mCameraId, displayOrientation, isMirror)<br>            &#125; catch (e: Exception) &#123;<br>                if (cameraListener != null) &#123;<br>                    cameraListener.onCameraError(e)<br>                &#125; else &#123;<br>                    e.printStackTrace()<br>                &#125;<br>            &#125;<br><br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p>启动相机这块就不多做介绍，以为网上现成的文档还是很多的。</p>
+<p>##下来才是重头戏！！！</p>
+<p>3、在FaceRectView的onDraw方法内进行人脸框显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">override fun onDraw(canvas: Canvas) &#123;<br>    super.onDraw(canvas)<br><br>    if (faceRectList != null &amp;&amp; faceRectList.isNotEmpty()) &#123;<br>        DrawFaceHelper.drawFaceRect(canvas, faceRectList[0].rect, color, 3)<br><br>        //不断进行刷新，实现人脸框动画更新<br>        postInvalidate()<br>    &#125; else &#123;<br>        DrawFaceHelper.resetTimerInfo()<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>这里需要说明下，相机返回的Face信息里面的Rect的坐标并不是view的真实坐标，这个需要转换。转换方式见 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b13a82935351">android人脸检测点位置转换</a></strong></p>
+<p>4、用DrawFaceHelper中的drawFaceRect绘制人脸框</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">/**<br>     * 绘制数据信息到view上，若 [DrawInfo.getName] 不为null则绘制 [DrawInfo.getName]<br>     *<br>     * @param canvas            需要被绘制的view的canvas<br>     * @param drawInfo          绘制信息<br>     * @param color             rect的颜色<br>     * @param faceRectThickness 人脸框线条粗细<br>     */<br>    fun drawFaceRect(canvas: Canvas?, drawInfo: Rect?, color: Int, faceRectThickness: Int) &#123;<br><br>        var displayOrientation: Int = if (isBackCameraId) &#123; 90 &#125; else &#123; 270 &#125;<br><br>        //将返回的人脸信息，转为view可识别的信息<br>        val matrix = CameraUtils.prepareMatrix(isBackCameraId, displayOrientation, cameraWidth.toInt(), cameraHeight.toInt())<br>        val rectF = RectF(drawInfo)<br>        matrix.mapRect(rectF)<br><br>        if (canvas == null || drawInfo == null) &#123;<br>            return<br>        &#125;<br>        if (timer == null) &#123;<br>            initTimerInfo()<br>        &#125;<br>        val paint = Paint()<br>        paint.style = Paint.Style.STROKE  //设置空心<br>        paint.strokeWidth = faceRectThickness.toFloat()<br><br>        val spic = 100<br>        val rect = Rect(rectF.left.toInt() - spic, rectF.top.toInt() - spic, rectF.right.toInt() + spic, rectF.bottom.toInt() + spic)<br><br>        val width = rect.right - rect.left<br>        val height = rect.bottom - rect.top<br>        //比较小的设置为半径<br>        val radius = if (height &gt; width) &#123; width / 2 &#125; else &#123; height / 2 &#125;<br>        val cx = (rect.left + rect.right) / 2<br>        val cy = (rect.top + rect.bottom) / 2<br><br>        //绘制遮罩层<br>        val maskPaint = Paint()<br>        //整个相机预览界面进行遮罩，透明度用来设置遮罩半透明<br>        canvas.saveLayerAlpha(0f, 0f, cameraWidth, cameraHeight, maskAlpha, Canvas.ALL_SAVE_FLAG)<br>        maskPaint.color = Color.BLACK<br>        //整个相机预览界面进行遮罩<br>        canvas.drawRect(Rect(0, 0, cameraWidth.toInt(), cameraHeight.toInt()), maskPaint)<br>        //重叠区域进行处理<br>        //只在源图像和目标图像不相交的地方绘制【源图像】，相交的地方根据目标图像的对应地方的alpha进行过滤，<br>        //目标图像完全不透明则完全过滤，完全透明则不过滤<br>        maskPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OUT)<br>        maskPaint.color = Color.BLACK<br>        canvas.drawCircle(cx.toFloat(), cy.toFloat(), radius.toFloat(), maskPaint)<br><br>        //自定义人脸框样式<br>        paint.flags = Paint.ANTI_ALIAS_FLAG  //抗锯齿<br>        paint.color = color<br><br>        //设置正方形，以便下面设置弧形为圆的弧形<br>        rect.left = cx - radius<br>        rect.top = cy - radius<br>        rect.right = cx + radius<br>        rect.bottom = cy + radius<br><br>        val rectF0 = getRectF(faceOffset0, rect)<br>        paint.strokeWidth = 4f<br>        paint.alpha = faceAlpha0<br>        canvas.drawArc(rectF0, getStartAngle(faceStartAngle0, false), faceSweepAngle0, useCenter, paint)<br><br>        val rectF1 = getRectF(faceOffset1, rect)<br>        paint.strokeWidth = 8f<br>        paint.alpha = faceAlpha1<br>        canvas.drawArc(rectF1, getStartAngle(faceStartAngle1, true), faceSweepAngle1, useCenter, paint)<br><br>        val rectF2 = getRectF(faceOffset2, rect)<br>        paint.strokeWidth = 3f<br>        paint.alpha = faceAlpha2<br>        canvas.drawArc(rectF2, getStartAngle(faceStartAngle2, false), faceSweepAngle2, useCenter, paint)<br><br>        paint.alpha = faceAlpha3<br>        val rectF3 = getRectF(faceOffset3, rect)<br>        paint.strokeWidth = 9f<br>        canvas.drawArc(rectF3, getStartAngle(faceStartAngle3, true), faceSweepAngle3, useCenter, paint)<br><br>        val rectF4 = getRectF(faceOffset3, rect)<br>        paint.strokeWidth = 9f<br>        canvas.drawArc(rectF4, getStartAngle(faceStartAngle4, true), faceSweepAngle4, useCenter, paint)<br>    &#125;<br><br>    /**<br>     * 设置圆环偏移量<br>     * @param startAngle 角度<br>     * @param clockwise  是否顺时针<br>     */<br>    private fun getStartAngle(startAngle:Float, clockwise: Boolean):Float &#123;<br>        val angle = if (clockwise) &#123; startAngle + timeIndex &#125; else &#123; startAngle - timeIndex&#125;<br><br>        return angle % 360<br>    &#125;<br><br>    private fun getRectF(offset: Int, rect: Rect): RectF &#123;<br>        val rectF = RectF(rect)<br>        rectF.left = rectF.left - offset<br>        rectF.top = rectF.top - offset<br>        rectF.right = rectF.right + offset<br>        rectF.bottom = rectF.bottom + offset<br><br>        return rectF<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>这就是实现的大致流程。</p>
+<p>代码里面只支持了显示一张人脸的检测方式。如有需要显示多张人脸的话请各位童鞋开动脑力自己解决！<br>完整代码请戳这里：<a target="_blank" rel="noopener" href="https://github.com/imqingyue/FaceCamera">FaceCamera</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+        <a data-aos="zoom-in" href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag">相机</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="https://gitee.com/staraaron/blog_source/raw/master/image/wallpaper/733590.png" data-sizes="auto" alt="android人脸检测点位置转换" class="lazyload">
+        
+      
+      <a href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          android人脸检测点位置转换
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <div class="sidebar-author-name">清柠茶</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      清柠茶
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        2.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:08
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <div class="sidebar-author-name">清柠茶</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "BJUP2l57cYKLPIhIEK7ktkBX-gzGzoHsz",
+      appKey: "EKHmTk3vijy6KsjjsgN4rpsb",
+      placeholder: "快快献上你的评论~",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.1.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+  </body>
+  </html>
+
