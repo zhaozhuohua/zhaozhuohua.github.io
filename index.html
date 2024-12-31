@@ -1,223 +1,385 @@
-<!DOCTYPE html>
-<html>
-<head>
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
   <meta charset="utf-8">
   
+
   
-  <title>桃之夭夭</title>
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};window.REIMU_CONFIG.code_block = {"expand":true};</script>
+  
+  <title>
+    
+    桃之夭夭
+  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+  
+    <meta property="og:type" content="website">
 <meta property="og:title" content="桃之夭夭">
 <meta property="og:url" content="https://www.zhaozhuohua.com/index.html">
 <meta property="og:site_name" content="桃之夭夭">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhaozhuohua.com/images/banner.webp">
 <meta property="article:author" content="清柠茶">
 <meta property="article:tag" content="android, kotlin, java, h5">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhaozhuohua.com/images/banner.webp">
+  
   
     <link rel="alternate" href="/atom.xml" title="桃之夭夭" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
+    <link rel="shortcut icon" href="/images/favicon.ico">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
   
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
 
   
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">桃之夭夭</a>
-      </h1>
+  <body>
+    
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/banner.webp" alt="">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
         
-          <a class="main-nav-link" href="/">Home</a>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">桃之夭夭</h1>
+          </a>
         
-      </nav>
-      <nav id="sub-nav">
+      
+      
         
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.zhaozhuohua.com"></form>
-      </div>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
     </div>
   </div>
 </header>
 
-      <div class="outer">
-        <section id="main">
+        <div id="content">
+          
+          <section id="main">
   
-    <article id="post-android人脸检测点位置转换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/" class="article-date">
-  <time class="dt-published" datetime="2024-12-26T09:20:00.000Z" itemprop="datePublished">2024-12-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">android人脸检测点位置转换</a>
-    </h1>
-  
-
-      </header>
+    <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
     
-    <div class="e-content article-entry" itemprop="articleBody">
+      <a class="post-link" href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/" aria-label="android人脸检测点位置转换"></a>
+    
+    
+    <div class="post-cover-left">
       
-        <meta name="referrer" content="no-referrer">
-
-<blockquote>
-<p>android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。</p>
-</blockquote>
-<p>先上效果图：<br><img src="https://upload-images.jianshu.io/upload_images/6471979-92cc8d7b2903b744.gif?imageMogr2/auto-orient/strip" alt="人脸检测.gif"></p>
-<p>Android 实现人脸检主要调用一下接口和方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mCamera!!.setFaceDetectionListener(object : Camera.FaceDetectionListener &#123;<br>        override fun onFaceDetection(p0: Array&lt;out Camera.Face&gt;?, p1: Camera?) &#123;<br>            var size = 0<br>            if (p0 != null) &#123;<br>                size = p0.size<br>            &#125;<br>            Log.i(&quot;face&quot;, &quot;size: $size&quot;)<br>        &#125;<br>    &#125;)<br>//开始人脸检测<br>mCamera!!.startFaceDetection()<br></code></pre></td></tr></table></figure>
-
-<p>以上代码就可以获取到人脸数量。</p>
-<p>但是到这里不满足的开发者就会觉得，我还想往上面现实人脸框呢，总不能拿界面上不显示任何信息吧。<br>那下来咱们看看人脸框是如何现实的</p>
-<p>首先明确一点，Camera.Face 这里面对应的坐标点和当前界面的坐标点不是一个意思，看看Android 中对Face类中Rect的介绍吧</p>
-<blockquote>
-<p>#rect<br>Added in <a target="_blank" rel="noopener" href="https://developer.android.google.cn/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API level 14</a><br>Deprecated in <a target="_blank" rel="noopener" href="https://developer.android.google.cn/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API level 21</a><br>Bounds of the face. (-1000, -1000) represents the top-left of the camera field of view, and (1000, 1000) represents the bottom-right of the field of view. For example, suppose the size of the viewfinder UI is 800x480. The rect passed from the driver is (-1000, -1000, 0, 0). The corresponding viewfinder rect should be (0, 0, 400, 240). It is guaranteed left &lt; right and top &lt; bottom. The coordinates can be smaller than -1000 or bigger than 1000. But at least one vertex will be within (-1000, -1000) and (1000, 1000).</p>
-<p>The direction is relative to the sensor orientation, that is, what the sensor sees. The direction is not affected by the rotation or mirroring of <a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/hardware/Camera.html#setDisplayOrientation(int)">Camera.setDisplayOrientation(int)</a>. The face bounding rectangle does not provide any information about face orientation.</p>
-</blockquote>
-<p>原文地址 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/hardware/Camera.Face.html">Camera.Face</a></p>
-<p>英文不好理解的话咱们直接上图<br><img src="https://upload-images.jianshu.io/upload_images/6471979-8347d50ece1ed520.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Camera.Face 中坐标.png"></p>
-<p>如图，正常view (0,0) 坐标是在左上角，而相机返回的人脸坐标(0,0)实在界面中央，所以拿到的Face信息咱们要进行转换后才能使用！<br>转换方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"> /**<br> * 准备用于转换的矩阵工具<br> *<br> * @param isBackCamera  是否后置相机<br> * @param displayOrientation  摄像头设置的角度<br> * @param viewWidth  预览界面宽<br> * @param viewHeight  预览界面高<br> */<br>fun prepareMatrix(isBackCamera: Boolean, displayOrientation: Int,<br>                  viewWidth: Int, viewHeight: Int): Matrix &#123;<br>    val matrix = Matrix()<br>    //前置摄像头处理镜像关系<br>    matrix.setScale(1f, (if (!isBackCamera) -1 else 1).toFloat())<br>    matrix.postRotate(displayOrientation.toFloat())<br>    matrix.postScale(viewWidth / 2000f, viewHeight / 2000f)<br>    matrix.postTranslate(viewWidth / 2f, viewHeight / 2f)<br><br>    return matrix<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>这也是android官方这转换方法，详见<a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/hardware/Camera.Face.html">Camera.Face</a></p>
-<p>咦？还没看懂。人脸识别更详细的看这里 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3a61cdaa3f58">Android人脸检测功能和检测特效</a></p>
-
+        
+        
+          <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="android人脸检测点位置转换" class="lazyload">
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://www.zhaozhuohua.com/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/" data-id="cm5bv8yvg0001w4eydb834gbc" data-title="android人脸检测点位置转换" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag">相机</a></li></ul>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-12-26</span>
+        <span><span class="icon-pencil"></span>672 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">android人脸检测点位置转换</h2>
+      <article class="post-article">
+        
+          
 
-    </footer>
+
+android相机开发很多需要进行人脸检测，很多公司也推出了自己的人脸识别服务。比如：阿里、腾讯、虹软、Face++等等。但这些有缺点，就是必须集成第三方库联网激活，也增大了app。如果只需要检测人脸这种轻量级功能，用第三方库就有些重，幸好android自带了人脸检测功能。下来我们就主要看看Android如何实现人脸检测。
+
+先上效果图：
+Android 实现人脸检主要调用一下接口和方法
+1234567891011mCamera!!.setFaceDetectionListener(object : Camera.FaceDetectionListener &amp;#123;        o
+        
+      </article>
+    </div>
   </div>
+</div>
   
-</article>
 
-
-
-  
 
 
 </section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B8%E6%9C%BA/" rel="tag">相机</a></li></ul>
-    </div>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper ">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <div class="sidebar-author-name">清柠茶</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">1</div>
   </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E7%9B%B8%E6%9C%BA/" style="font-size: 10px;">相机</a>
-    </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">0</div>
   </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li></ul>
-    </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">1</div>
   </div>
-
-
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">android人脸检测点位置转换</a>
-          </li>
-        
-      </ul>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+
+      
+      
     </div>
   </div>
 
   
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 清柠茶<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      清柠茶
     </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        672
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:02
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
   </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <div class="sidebar-author-name">清柠茶</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+</div>
+<div class="sidebar-social">
   
-    <a href="/" class="mobile-nav-link">Home</a>
+</div>
+<div class="sidebar-menu">
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+
+    
+  </div>
   
 </nav>
+
+    </div>
     
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
 
 
 
@@ -225,8 +387,94 @@
 
 
 
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
 
 
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+    
+    
   </div>
-</body>
-</html>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.1.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+  </body>
+  </html>
+
