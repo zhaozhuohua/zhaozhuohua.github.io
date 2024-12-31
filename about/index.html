@@ -117,7 +117,16 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/banner.webp" alt="关于">
+      <picture>
+        
+          <source media="(max-width: 479px)" srcset="/images/banner-600w.webp">
+        
+          <source media="(max-width: 799px)" srcset="/images/banner-800w.webp">
+        
+          <source media="(min-width: 800px)" srcset="/images/banner.webp">
+        
+        <img fetchpriority="high" src="/images/banner.webp" alt="关于">
+      </picture>
     
   
   <div id="header-outer">
@@ -441,6 +450,17 @@
 
 
 
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
 
 
 <div id="lazy-script">

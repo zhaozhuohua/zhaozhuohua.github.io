@@ -112,7 +112,16 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/banner.webp" alt="">
+      <picture>
+        
+          <source media="(max-width: 479px)" srcset="/images/banner-600w.webp">
+        
+          <source media="(max-width: 799px)" srcset="/images/banner-800w.webp">
+        
+          <source media="(min-width: 800px)" srcset="/images/banner.webp">
+        
+        <img fetchpriority="high" src="/images/banner.webp" alt="">
+      </picture>
     
   
   <div id="header-outer">
@@ -148,7 +157,7 @@
     
     <div class="post-cover-left">
       
-        <img data-src="https://gitee.com/staraaron/blog_source/raw/master/image/wallpaper/219884.jpg" data-sizes="auto" alt="Android人脸检测功能和检测特效" class="lazyload">
+        <img data-src="https://gitee.com/staraaron/blog_source/raw/master/image/wallpaper/ndmz3.jpg" data-sizes="auto" alt="Android人脸检测功能和检测特效" class="lazyload">
       
     </div>
     <div class="post-info">
@@ -184,7 +193,7 @@
       
         
         
-          <img data-src="/covers/bg1_old.jpg" data-sizes="auto" alt="android人脸检测点位置转换" class="lazyload">
+          <img data-src="https://gitee.com/staraaron/blog_source/raw/master/image/wallpaper/ndmz3.jpg" data-sizes="auto" alt="android人脸检测点位置转换" class="lazyload">
         
       
     </div>
@@ -462,6 +471,17 @@ Android 实现人脸检主要调用一下接口和方法
 
 
 
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
 
 
 <div id="lazy-script">
