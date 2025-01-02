@@ -22,6 +22,10 @@
     <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   
   
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
   
     <meta property="og:type" content="website">
 <meta property="og:title" content="桃之夭夭">
@@ -57,11 +61,53 @@
 <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
 
   
-  <meta name="referrer" content="no-referrer"/>
+  
 <meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
     
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">正在走向世界...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
 <div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
 
@@ -113,17 +159,11 @@
 </div>
 <header id="header">
   
+    <picture>
+      
+    </picture>
     
-      <picture>
-        
-          <source media="(max-width: 479px)" srcset="/images/zzy_banner-600w.webp">
-        
-          <source media="(max-width: 799px)" srcset="/images/zzy_banner-800w.webp">
-        
-          <source media="(min-width: 800px)" srcset="/images/zzy_banner.webp">
-        
-        <img fetchpriority="high" src="/images/banner.webp" alt="">
-      </picture>
+      <img fetchpriority="high" src="/images/banner.webp" alt="">
     
   
   <div id="header-outer">
@@ -148,74 +188,15 @@
   </div>
 </header>
 
-        <div id="content">
-          
-          <section id="main">
-<div class="archives-outer-wrap" data-aos="fade-up">
-  <div class="tag-wrap">
-    
-      <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/%E7%9B%B8%E6%9C%BA/">相机</a>
-      </div>
-    
-  </div>
-  <div class="category-wrap">
-    
-  </div>
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap" data-aos="fade-up">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <ul>
-          
-          <li class="archive-article">
-  <div class="archive-article-date-wrap">
-    <a href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/">
-      <time class="dt-published" datetime="2024-12-31T07:45:29.000Z" itemprop="datePublished">12-31</time>
-    </a>
-  </div>
-  
-    <a class="archive-article-title" href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/">Android人脸检测功能和检测特效</a>
-  
-</li>
-
-          
-    
-    
-          <li class="archive-article">
-  <div class="archive-article-date-wrap">
-    <a href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">
-      <time class="dt-published" datetime="2024-12-26T09:20:00.000Z" itemprop="datePublished">12-26</time>
-    </a>
-  </div>
-  
-    <a class="archive-article-title" href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">android人脸检测点位置转换</a>
-  
-</li>
-
-          
-          
-        </ul>
-      </section>
-  
-  </div>
-
-
-
-</section>
-          
-            <aside id="sidebar">
   <div class="sidebar-wrapper ">
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="清柠茶" class="lazyload">
   <div class="sidebar-author-name">清柠茶</div>
   <div class="sidebar-description"></div>
 </div>
@@ -279,11 +260,73 @@
     </div>
   </div>
 
+  <div class="sidebar-widget">
   
+  </div>
 </aside>
 
-          
+          <section id="main">
+<div class="archives-outer-wrap" data-aos="fade-up">
+  <div class="tag-wrap">
+    
+      <div class="archives-tag-list-item" data-aos="zoom-in">
+        <a class="archives-tag-list-link" href="/tags/%E7%9B%B8%E6%9C%BA/">相机</a>
+      </div>
+    
+  </div>
+  <div class="category-wrap">
+    
+  </div>
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap" data-aos="fade-up">
+        <div class="archive-year-wrap">
+          <a href="/archives/2024" class="archive-year">2024</a>
         </div>
+        <ul>
+          
+          <li class="archive-article">
+  <div class="archive-article-date-wrap">
+    <a href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/">
+      <time class="dt-published" datetime="2024-12-31T07:45:29.000Z" itemprop="datePublished">12-31</time>
+    </a>
+  </div>
+  
+    <a class="archive-article-title" href="/2024/12/31/Android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%92%8C%E6%A3%80%E6%B5%8B%E7%89%B9%E6%95%88/">Android人脸检测功能和检测特效</a>
+  
+</li>
+
+          
+    
+    
+          <li class="archive-article">
+  <div class="archive-article-date-wrap">
+    <a href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">
+      <time class="dt-published" datetime="2024-12-26T09:20:00.000Z" itemprop="datePublished">12-26</time>
+    </a>
+  </div>
+  
+    <a class="archive-article-title" href="/2024/12/26/android%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E7%82%B9%E4%BD%8D%E7%BD%AE%E8%BD%AC%E6%8D%A2/">android人脸检测点位置转换</a>
+  
+</li>
+
+          
+          
+        </ul>
+      </section>
+  
+  </div>
+
+
+
+</section>
+        </div>
+        
+        
         <footer id="footer">
   <div style="width: 100%; overflow: hidden">
     <div class="footer-line"></div>
@@ -337,7 +380,7 @@
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="清柠茶" class="lazyload">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="清柠茶" class="lazyload">
   <div class="sidebar-author-name">清柠茶</div>
   <div class="sidebar-description"></div>
 </div>
@@ -457,6 +500,8 @@
 
 
 
+
+
   
 <script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
 
@@ -489,7 +534,7 @@
   \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
                                                   
 `,'color: #ff5252;')
-    console.log('%c Theme.Reimu v' + '1.1.1' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.2.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
   </script>
   
 
@@ -510,6 +555,9 @@
     });
   }
 </script>
+
+
+
 
 
 
