@@ -3400,7 +3400,11 @@ figure.highlight pre .javascript .function {
 #page-header {
   position: relative;
   width: 100%;
-  background-color: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);
+  background-image: -webkit-linear-gradient(70deg, #0062be, #925696, #cc426e, #fb0347);
+  background-image: -moz-linear-gradient(70deg, #0062be, #925696, #cc426e, #fb0347);
+  background-image: -o-linear-gradient(70deg, #0062be, #925696, #cc426e, #fb0347);
+  background-image: -ms-linear-gradient(70deg, #0062be, #925696, #cc426e, #fb0347);
+  background-image: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
